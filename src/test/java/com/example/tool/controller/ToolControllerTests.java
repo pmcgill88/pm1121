@@ -121,10 +121,10 @@ class ToolControllerTests {
                 () -> Assertions.assertNotNull(rentalContract),
                 () -> Assertions.assertEquals("2015-07-02", rentalContract.getBody().getCheckoutDate().toString()),
                 () -> Assertions.assertEquals("2015-07-11", rentalContract.getBody().getDueDate().toString()),
-                () -> Assertions.assertEquals(6, rentalContract.getBody().getDaysCharged()),
-                () -> Assertions.assertEquals("17.94", rentalContract.getBody().getPreDiscountCharge().toString()),
+                () -> Assertions.assertEquals(5, rentalContract.getBody().getDaysCharged()),
+                () -> Assertions.assertEquals("14.95", rentalContract.getBody().getPreDiscountCharge().toString()),
                 () -> Assertions.assertEquals("0.00", rentalContract.getBody().getDiscountAmount().toString()),
-                () -> Assertions.assertEquals("17.94", rentalContract.getBody().getFinalCharge().toString())
+                () -> Assertions.assertEquals("14.95", rentalContract.getBody().getFinalCharge().toString())
         );
     }
 
@@ -139,10 +139,10 @@ class ToolControllerTests {
                 () -> Assertions.assertNotNull(rentalContract),
                 () -> Assertions.assertEquals("2020-07-02", rentalContract.getBody().getCheckoutDate().toString()),
                 () -> Assertions.assertEquals("2020-07-06", rentalContract.getBody().getDueDate().toString()),
-                () -> Assertions.assertEquals(2, rentalContract.getBody().getDaysCharged()),
-                () -> Assertions.assertEquals("5.98", rentalContract.getBody().getPreDiscountCharge().toString()),
-                () -> Assertions.assertEquals("2.99", rentalContract.getBody().getDiscountAmount().toString()),
-                () -> Assertions.assertEquals("2.99", rentalContract.getBody().getFinalCharge().toString())
+                () -> Assertions.assertEquals(1, rentalContract.getBody().getDaysCharged()),
+                () -> Assertions.assertEquals("2.99", rentalContract.getBody().getPreDiscountCharge().toString()),
+                () -> Assertions.assertEquals("1.50", rentalContract.getBody().getDiscountAmount().toString()),
+                () -> Assertions.assertEquals("1.49", rentalContract.getBody().getFinalCharge().toString())
         );
     }
 }

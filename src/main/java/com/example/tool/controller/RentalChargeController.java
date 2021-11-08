@@ -52,7 +52,7 @@ public class RentalChargeController {
             System.out.println("toolCode is empty");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "toolCode is empty");
         } else if (dayCount < 1) {
-            System.out.println("Rental day count must be greater then 0");
+            System.out.println("Rental day count must be 1 or greater");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Rental day count must be greater then 0");
         } else if (discount < 0 || discount > 100) {
             System.out.println("Discount must be between 0 and 100");

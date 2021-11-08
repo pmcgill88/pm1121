@@ -23,18 +23,28 @@ public class ChargeUtil {
             dateCheck = dateCheck.plusDays(1);
             dayCheck = dateCheck.getDayOfWeek();
             monthCheck = dateCheck.getMonth();
-            if (rentalContract.getRentalCharge().isWeekendCharge() && (dayCheck.equals(DayOfWeek.SATURDAY) || dayCheck.equals(DayOfWeek.SUNDAY))) {
-                if ((dateCheck.getDayOfMonth() == 4 && monthCheck.equals(Month.JULY))) {
-                    if (rentalContract.getRentalCharge().isHolidayCharge()) {
-                        daysChargedCalc++;
-                        cost = cost.add(rentalContract.getRentalCharge().getDailyCharge());
-                    }
-                } else {
+            if (dayCheck.equals(DayOfWeek.SATURDAY) || dayCheck.equals(DayOfWeek.SUNDAY)) {
+                if (rentalContract.getRentalCharge().isWeekendCharge()){
                     daysChargedCalc++;
                     cost = cost.add(rentalContract.getRentalCharge().getDailyCharge());
                 }
+                if ((dateCheck.getDayOfMonth() == 4 && monthCheck.equals(Month.JULY))) {
+                    if (rentalContract.getRentalCharge().isHolidayCharge() && dayCheck.equals(DayOfWeek.SUNDAY)) {
+                        dateCheck = dateCheck.plusDays(1);
+                        daysChargedCalc++;
+                        cost = cost.add(rentalContract.getRentalCharge().getDailyCharge());
+                        i--;
+                    } else if (!rentalContract.getRentalCharge().isHolidayCharge() && dayCheck.equals(DayOfWeek.SUNDAY)){
+                        dateCheck = dateCheck.plusDays(1);
+                        i--;
+                    } else if (!rentalContract.getRentalCharge().isHolidayCharge() && rentalContract.getRentalCharge().isWeekdayCharge() && rentalContract.getRentalDays() - i  > 0){
+                        daysChargedCalc--;
+                        cost = cost.subtract(rentalContract.getRentalCharge().getDailyCharge());
+                    }
+                }
             } else if (rentalContract.getRentalCharge().isWeekdayCharge() && !(dayCheck.equals(DayOfWeek.SATURDAY) || dayCheck.equals(DayOfWeek.SUNDAY))) {
-                if (dateCheck.isEqual(dateCheck.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY))) && monthCheck.equals(Month.SEPTEMBER)) {
+                if (dateCheck.isEqual(dateCheck.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY))) && monthCheck.equals(Month.SEPTEMBER) ||
+                        (dateCheck.getDayOfMonth() == 4 && monthCheck.equals(Month.JULY))) {
                     if (rentalContract.getRentalCharge().isHolidayCharge()) {
                         daysChargedCalc++;
                         cost = cost.add(rentalContract.getRentalCharge().getDailyCharge());
